@@ -19,8 +19,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'last_name',
         'role',
+        'comuna',
+        'telefono',
+        'email',
         'password',
     ];
 
@@ -65,5 +68,11 @@ class User extends Authenticatable
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function estudiantes(){
+          //se crea la relacion de la tabla user con estudiante
+        //un user tiene muchos estudiantes
+        return $this->hasMany(Estudiante::class);
     }
 }
