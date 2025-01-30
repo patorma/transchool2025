@@ -75,4 +75,8 @@ class User extends Authenticatable
         //un user tiene muchos estudiantes
         return $this->hasMany(Estudiante::class);
     }
+
+    public function pagos(){
+        return $this->hasMany(Pago::class);
+    }
 }
