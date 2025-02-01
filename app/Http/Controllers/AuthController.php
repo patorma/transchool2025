@@ -19,11 +19,11 @@ class AuthController extends Controller
      */
     public function register(Request $request) {
         $validator = Validator::make($request->all(),[
-            'name'=>'required|string|min:10|max:100',
-            'last_name'=>'required|string|min:10|max:100',
+            'name'=>'required|string|min:4|max:300',
+            'last_name'=>'required|string|min:4|max:300',
             'role'=>'required|string|in:admin,apoderado,transportista',
             'comuna' => 'required|string|min:4|max:20',
-            'telefono' =>'required|integer|min:6|max:15',
+            'telefono' =>'required|string|min:6|max:30',
             'email'=>'required|string|email|min:10|max:90|unique:users',
             'password'=>'required|string|min:10|confirmed',
         ]);
@@ -84,11 +84,11 @@ class AuthController extends Controller
         }
 
         $validator = Validator::make($request->all(),[
-            'name'=>'sometimes|string|min:10|max:100',
-            'last_name'=>'sometimes|string|min:10|max:100',
-            'role'=>'sometimes|string|in:admin,user',
+            'name'=>'sometimes|string|min:10|max:300',
+            'last_name'=>'sometimes|string|min:10|max:300',
+            'role'=>'sometimes|string|in:admin,apoderado,transportista',
             'comuna' => 'sometimes|string|min:4|max:20',
-            'telefono' =>'sometimes|integer|min:6|max:15',
+            'telefono' =>'sometimes|string|min:6|max:15',
             'email'=>'sometimes|string|email|min:10|max:90|unique:users',
             'password'=>'sometimes|string|min:10|confirmed',
         ]);
@@ -125,13 +125,15 @@ class AuthController extends Controller
     }
 
     public function getUsers(){
-        $users= User::all();
+        $users= User::paginate(10);
         if($users->isEmpty()){
             return response()->json(['message'=> 'No users found']);
         }
 
         return AuthResource::collection($users);
     }
+
+
     /**
      * Get the token array structure.
      *

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('monto');
             $table->date('fecha_vencimiento');
             $table->date('fecha_pago')->nullable();
-            $table->enum('estado',['pendiente','pagado'])->default('pendiente');
+            $table->enum('estado',['pendiente','pagado','vencido'])->default('pendiente');
             $table->foreignId('usuario_id');
             $table->timestamps();
 

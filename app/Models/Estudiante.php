@@ -22,4 +22,11 @@ class Estudiante extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function asignaciones_de_estudiantes(){
+        return $this->hasMany(AsignacionesDeEstudiantes::class);
+    }
+
+    public function recorridos(){
+        return $this->hasMany(Recorrido::class);
+    }
 }

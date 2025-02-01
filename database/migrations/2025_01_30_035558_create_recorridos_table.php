@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('recorridos', function (Blueprint $table) {
             $table->id();
+            $table->text('descripcion');
+            $table->foreignId('estudiante_id');
             $table->timestamps();
+
+            $table->foreign('estudiante_id')
+            ->references('id')
+            ->on('estudiantes')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
         });
     }
 

@@ -11,6 +11,15 @@ class Furgon extends Model
 
     protected $fillable =[
         'patente',
-        'descripcion'
+        'descripcion',
+        'usuario_id'
     ];
+
+    public function usuario(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function asignaciones(){
+        return $this->hasMany(AsignacionesDeEstudiantes::class);
+    }
 }
