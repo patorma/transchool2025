@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EstudianteResource;
 use App\Models\Estudiante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +23,12 @@ class EstudianteController extends Controller
         $usuario_id = auth()->id();
         $estudiante = Estudiante::create([
             'name'=> $request->get('name'),
-
+            'last_name'=> $request->get('last_name'),
+            'fecha_nacimiento' => $request->get('fecha_nacimiento'),
+            'colegio'=> $request->get('colegio'),
+            'usuario_id' => $usuario_id
         ]);
+
+        return (new EstudianteResource($estudiante))->additional(['message' =>'Estudiante created succesfully']);
     }
 }
