@@ -81,7 +81,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Pago::class);
     }
 
-    public function furgones(){
-        return $this->hasOne(Furgon::class);
+    public function furgon(){
+        return $this->hasOne(Furgon::class,'usuario_id');
     }
 }

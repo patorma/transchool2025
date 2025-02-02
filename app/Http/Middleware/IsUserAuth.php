@@ -18,7 +18,7 @@ class IsUserAuth
         if(auth('api')->user()){
             return $next($request);
         }else {
-            return response()->json(['messahe'=>'Unauthorized'],401);
+            return response()->json(['message'=>'Unauthorized'],401);
         }
     }
 }
