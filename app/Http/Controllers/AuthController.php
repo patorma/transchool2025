@@ -84,8 +84,8 @@ class AuthController extends Controller
         }
 
         $validator = Validator::make($request->all(),[
-            'name'=>'sometimes|string|min:10|max:300',
-            'last_name'=>'sometimes|string|min:10|max:300',
+            'name'=>'sometimes|string|min:3|max:300',
+            'last_name'=>'sometimes|string|min:3|max:300',
             'role'=>'sometimes|string|in:admin,apoderado,transportista',
             'comuna' => 'sometimes|string|min:4|max:20',
             'telefono' =>'sometimes|string|min:6|max:15',
@@ -133,6 +133,16 @@ class AuthController extends Controller
         return AuthResource::collection($users);
     }
 
+    public function deleteUserById($id){
+        $user = User::find($id);
+        if(!$user){
+            return response()->json(['message'=>'User not found'.' '.'con el id:'.' '.$id],404);
+        }
+
+        $user->delete();
+
+        return response()->json(['message' => 'User deleted successfully'.' ' .'con el id:'.' '.$id],200);
+    }
 
     /**
      * Get the token array structure.

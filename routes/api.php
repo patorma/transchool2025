@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\FurgonController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\RecorridoController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsApoderado;
 use App\Http\Middleware\IsUserAuth;
@@ -19,6 +20,13 @@ Route::middleware(IsUserAuth::class)->group(function(){
    Route::controller(AuthController::class)->group(function(){
       Route::post('logout','logout');
       Route::get('me','getUser');
+
+   });
+
+   Route::controller(EstudianteController::class)->group(function(){
+
+    Route::get('estudiantes','getEstudiantes');
+    Route::get('/estudiante/{id}','getEstudianteById');
    });
 
    Route::middleware([IsAdmin::class])->group(function(){
@@ -33,6 +41,8 @@ Route::middleware(IsUserAuth::class)->group(function(){
     //Ver usuarios registrados por parte del admin
     Route::controller(AuthController::class)->group(function(){
         Route::get('users','getUsers');
+        Route::delete('user/{id}','deleteUserById');
+        Route::patch('/user/{id}','updateUserById');
     });
 
     //Modulo de Furgones Ingresados por admin
@@ -43,15 +53,23 @@ Route::middleware(IsUserAuth::class)->group(function(){
         Route::get('/furgon/{id}','getFurgonById');
         Route::delete('/furgon/{id}','deleteFurgonById');
     });
+
+    Route::controller(RecorridoController::class)->group(function(){
+        Route::post('recorrido','addRecorrido');
+        Route::patch('/recorrido/{id}','updateRecorridoById');
+        Route::get('recorridos','getRecorridos');
+        Route::get('/recorrido/{id}','getRecorridoById');
+        Route::delete('/recorrido/{id}','deleteRecorridoById');
+    });
    });
 
    Route::middleware([IsApoderado::class])->group(function(){
         Route::controller(EstudianteController::class)->group(function(){
             Route::post('estudiante','addEstudiante');
             Route::patch('/estudiante/{id}','updateEstudianteById');
-            Route::get('estudiantes','getEstudiantes');
-            Route::get('/estudiante/{id}','getEstudianteById');
             Route::delete('/estudiante/{id}','deleteEstudianteById');
         });
+
+
    });
 } );
