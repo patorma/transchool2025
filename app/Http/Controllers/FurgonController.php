@@ -33,13 +33,12 @@ class FurgonController extends Controller
         ]);
 
 
-        $furgon->load('user');
 
         return (new FurgonResource($furgon))->additional(['message' => 'Furgon created succesfully']);
     }
 
     public function updateFurgonoById(Request $request,$id){
-        $furgon = Furgon::with('user')->find($id);
+        $furgon = Furgon::find($id);
          if(!$furgon){
             return response()->json(['message' => 'Furgon not found'],404);
          }
@@ -59,7 +58,7 @@ class FurgonController extends Controller
         if($request->has('descripcion')){
             $furgon->descripcion = $request->descripcion;
         }
-        $furgon->load('user');
+
         $furgon->update();
         return (new FurgonResource($furgon))->additional([
             'message'=> 'Furgon updated successfully'

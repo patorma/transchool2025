@@ -12,6 +12,6 @@ class Recorrido extends Model
     ];
 
     public function estudiante(){
-        return $this->belongsTo(Estudiante::class);
+        return $this->belongsTo(Estudiante::class,'estudiante_id');
     }
 }

@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\FurgonController;
 use App\Http\Controllers\PagoController;
 use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsApoderado;
 use App\Http\Middleware\IsUserAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,5 +43,15 @@ Route::middleware(IsUserAuth::class)->group(function(){
         Route::get('/furgon/{id}','getFurgonById');
         Route::delete('/furgon/{id}','deleteFurgonById');
     });
+   });
+
+   Route::middleware([IsApoderado::class])->group(function(){
+        Route::controller(EstudianteController::class)->group(function(){
+            Route::post('estudiante','addEstudiante');
+            Route::patch('/estudiante/{id}','updateEstudianteById');
+            Route::get('estudiantes','getEstudiantes');
+            Route::get('/estudiante/{id}','getEstudianteById');
+            Route::delete('/estudiante/{id}','deleteEstudianteById');
+        });
    });
 } );

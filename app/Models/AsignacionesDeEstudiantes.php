@@ -16,10 +16,10 @@ class AsignacionesDeEstudiantes extends Model
      ];
 
      public function estudiante(){
-        return $this->belongsTo(Estudiante::class);
+        return $this->belongsTo(Estudiante::class,'estudiante_id');
      }
 
      public function furgon(){
-        return $this->belongsTo(Furgon::class);
+        return $this->belongsTo(Furgon::class,'furgon_id');
      }
 }

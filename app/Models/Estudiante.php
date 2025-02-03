@@ -19,7 +19,7 @@ class Estudiante extends Model
 
     public function user(){
           // un estudiante pertene a un usuario apoderado
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'usuario_id');
     }
 
     public function asignaciones_de_estudiantes(){
