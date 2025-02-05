@@ -71,8 +71,15 @@ class EstudianteController extends Controller
     }
 
     public function getEstudiantes(){
+        $usuario_id = auth()->id();
+        $user = auth('api')->user();
+        if($user->role === 'admin'){
+            $estudiantes=Estudiante::paginate(10);
+            return $estudiantes->isEmpty()?
+            response()->json(['message'=> 'No Estudiantes found']):EstudianteResource::collection($estudiantes);
 
-        $estudiantes = Estudiante::with('user')->paginate(10);
+        }
+        $estudiantes = Estudiante::where('usuario_id',$usuario_id)->paginate(10);
         if($estudiantes->isEmpty()){
             return response()->json(['message'=> 'No Estudiantes found']);
         }
@@ -99,7 +106,13 @@ class EstudianteController extends Controller
     }
 
     public function getEstudianteById($id){
-        $estudiante = Estudiante::with('user')->find($id);
+        $usuario_id = auth()->id();
+        $user = auth('api')->user();
+        if($user->role === 'admin'){
+            $estudiante =Estudiante::find($id);
+            return !$estudiante?response()->json(['message' => 'Estudiante not found'],404):new EstudianteResource($estudiante);
+        }
+        $estudiante = Estudiante::where('usuario_id',$usuario_id)->find($id);
 
         if(!$estudiante){
             return response()->json(['message' => 'Estudiante not found'],404);
@@ -112,7 +125,9 @@ class EstudianteController extends Controller
 
 
     public function deleteEstudianteById($id){
-        $estudiante = Estudiante::find($id);
+
+        $usuario_id = auth()->id();
+        $estudiante = Estudiante::where('usuario_id',$usuario_id)->find($id);
         if(!$estudiante){
             return response()->json(['message'=>'Estudiante not found'.' '.'con el id:'.' '.$id],404);
         }

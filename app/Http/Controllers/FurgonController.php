@@ -92,4 +92,6 @@ class FurgonController extends Controller
         return response()->json(['message' => 'Furgon deleted successfully'],200);
     }
 
+
+
 }
