@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AsignacionesDeEstudiantesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\FurgonController;
@@ -60,6 +61,14 @@ Route::middleware(IsUserAuth::class)->group(function(){
         Route::get('recorridos','getRecorridos');
         Route::get('/recorrido/{id}','getRecorridoById');
         Route::delete('/recorrido/{id}','deleteRecorridoById');
+    });
+
+    Route::controller(AsignacionesDeEstudiantesController::class)->group(function(){
+        Route::post('asignacion','addAsignacion');
+        Route::patch('/asignacion/{id}','updateAsignacionById');
+        Route::get('asignaciones','getAsignaciones');
+        Route::get('/asignacion/{id}','getAsignacionById');
+        Route::delete('/asignacion/{id}','deleteById');
     });
    });
 

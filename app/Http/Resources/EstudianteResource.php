@@ -24,6 +24,7 @@ class EstudianteResource extends JsonResource
                 'id' => $this->usuario_id,
                 'nombres' => $this->user->name ?? null,
                 'apellidos' => $this->user->last_name ?? null,
+                 'comuna' => $this->user->comuna??null,
                  'rol' =>  $this->user->role ?? null
              ]
         ];

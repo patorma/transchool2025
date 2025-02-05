@@ -71,12 +71,31 @@ class EstudianteController extends Controller
     }
 
     public function getEstudiantes(){
+
         $estudiantes = Estudiante::with('user')->paginate(10);
         if($estudiantes->isEmpty()){
             return response()->json(['message'=> 'No Estudiantes found']);
         }
-
         return EstudianteResource::collection($estudiantes);
+        //revisar
+        //con estos cambios nos aseguramos que el apoderado solo veo sus estudiantes
+        // $usuario = auth()->user();
+        // if($usuario->role === 'admin'){
+        //     $estudiantes = Estudiante::paginate(10);
+        // }elseif($usuario->role === 'apoderado'){
+        //     $estudiantes = Estudiante::where('usuario_id',$usuario->id)->paginate(10);
+        // }elseif ($usuario->role === 'transportista'){
+        //     $estudiantes = Estudiante::whereHas();
+        // }
+
+
+        // $estudiantes = Estudiante::with('usuario_id',$usuario_id)->paginate(10);
+
+        // if($estudiantes->isEmpty()){
+        //     return response()->json(['message'=> 'No Estudiantes found']);
+        // }
+
+        // return EstudianteResource::collection($estudiantes);
     }
 
     public function getEstudianteById($id){

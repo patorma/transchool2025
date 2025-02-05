@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('asignaciones_de_estudiantes', function (Blueprint $table) {
             $table->id();
             $table->date('fecha_registro');
-            $table->foreignId('estudiante_id');
+            $table->foreignId('estudiante_id')->unique();
             $table->foreignId('furgon_id');
             $table->timestamps();
 
