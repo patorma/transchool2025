@@ -26,6 +26,7 @@ class Pago extends Model
   }
 
   public function calcularMulta(){
+    $diasDiferencia = 0;
       if($this->fecha_pago){
         $fechaVencimiento = Carbon::parse($this->fecha_vencimiento);
         $fechaPago = Carbon::parse($this->fecha_pago);

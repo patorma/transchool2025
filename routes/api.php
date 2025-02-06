@@ -30,6 +30,10 @@ Route::middleware(IsUserAuth::class)->group(function(){
     Route::get('/estudiante/{id}','getEstudianteById');
    });
 
+   Route::controller(PagoController::class)->group(function(){
+    Route::get('pagos','getPagos');
+   });
+
    Route::middleware([IsAdmin::class])->group(function(){
 
     Route::controller(PagoController::class)->group(function(){
@@ -37,7 +41,7 @@ Route::middleware(IsUserAuth::class)->group(function(){
          Route::get('/pago/{id}','getPagoById');
          Route::patch('/pago/{id}','updatePagoById');
          Route::delete('/pago/{id}','deletePagoById');
-         Route::get('pagos','getPagos');
+
     });
     //Ver usuarios registrados por parte del admin
     Route::controller(AuthController::class)->group(function(){

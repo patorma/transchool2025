@@ -21,6 +21,7 @@ class PagoResource extends JsonResource
               'estado' => $this->estado,
               'fecha_pago' => $this-> fecha_pago,
               'multa' => $this->multa,
+              'total' => $this->monto + $this->multa,
               'usuario' =>[
                  'id' => $this->usuario_id,
                  'nombres' => $this->user->name ?? null,

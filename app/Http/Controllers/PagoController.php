@@ -29,6 +29,7 @@ class PagoController extends Controller
         if(!$user_apoderado){
             return response()->json(['error' => 'El usuario seleccionado no tiene el rol de apoderado.'], 400);
         }
+
         $pago = Pago::create([
             'monto' => $request->get('monto'),
             'fecha_vencimiento' => $request->get('fecha_vencimiento'),
@@ -37,6 +38,8 @@ class PagoController extends Controller
              'usuario_id' =>  $request->get('usuario_id')
 
         ]);
+
+        $pago->calcularMulta();
 
         return (new PagoResource($pago))->additional(['message' =>'Pago created succesfully']);
 
