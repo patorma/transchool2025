@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\PagoResource;
 use App\Models\Pago;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,20 +15,26 @@ class PagoController extends Controller
             'monto' => 'required|numeric|min:0|max:9999999',
             'fecha_vencimiento' => 'required|date',
             'fecha_pago' => 'date|nullable',
-
+            'usuario_id' => 'required|exists:users,id'
 
 
         ]);
         if($validator->fails()){
             return response()->json(['error'=> $validator->errors()],422);
         }
-        $usuario_id = auth()->id();
+        //$usuario_id = auth()->id();
+        $user_apoderado = User::where('id',$request->get('usuario_id'))
+                             ->where('role','apoderado')
+                             ->first();
+        if(!$user_apoderado){
+            return response()->json(['error' => 'El usuario seleccionado no tiene el rol de apoderado.'], 400);
+        }
         $pago = Pago::create([
             'monto' => $request->get('monto'),
             'fecha_vencimiento' => $request->get('fecha_vencimiento'),
             'fecha_pago' => $request->get('fecha_pago'),
              'estado' => 'pendiente',
-            'usuario_id' => $usuario_id,
+             'usuario_id' =>  $request->get('usuario_id')
 
         ]);
 
@@ -73,7 +80,14 @@ class PagoController extends Controller
     }
 
     public function getPagos(){
-        $pagos = Pago::with('user')->paginate(10);
+        $usuario_id = auth()->id();
+        $user = auth('api')->user();
+        if($user->role === 'admin'){
+            $pagos = Pago::paginate(10);
+            return $pagos->isEmpty() ?
+            response()->json(["message" => "No Pagos found"]):PagoResource::collection($pagos);
+        }
+        $pagos = Pago::where('usuario_id',$usuario_id)->paginate(10);
         if($pagos->isEmpty()){
             return response()->json(['message'=> 'No pagos found']);
         }
@@ -82,11 +96,18 @@ class PagoController extends Controller
     }
 
     public function getPagoById($id){
-        $pago =Pago::with('user')->find($id);
+        $usuario_id = auth()->id();
+        $user = auth('api')->user();
+        if($user->role === 'admin'){
+            $pago = Pago::find($id);
+            return !$pago?response()->json(['message'=>'Pago not found'],404):new PagoResource($pago);
+        }
+        $pago =Pago::where('usuario_id',$usuario_id)->find($id);
+
         if(!$pago){
             return response()->json(['message' => 'Pago not found'],404);
         }
-
+        $pago->load('user');
         return new PagoResource($pago);
     }
 
