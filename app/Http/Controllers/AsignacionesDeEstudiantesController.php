@@ -74,7 +74,7 @@ class AsignacionesDeEstudiantesController extends Controller
         }if($user->role === 'apoderado'){
            return  response()->json(['message'=>'Eres apoderado no tienes acceso a este recurso']);
         }
-
+   //esto es para que el transportista vea los estudiantes asignados a su furgon
         $asignaciones = AsignacionesDeEstudiantes::whereHas('furgon', function ($query) use ($usuario_id) {
             $query->where('usuario_id', $usuario_id);
         })->with('estudiante', 'furgon.user')

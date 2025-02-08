@@ -1,0 +1,1065 @@
+{
+	"info": {
+		"_postman_id": "4c2b1604-8831-4f9f-be10-036fa03f6a1f",
+		"name": "Transchool_2025_Laravel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2777611"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Registrar usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Patricio\",\r\n    \"last_name\": \"Contreras\",\r\n    \"role\": \"admin\",\r\n    \"comuna\": \"Santiago\",\r\n    \"telefono\": \"+562469265\",\r\n    \"email\": \"patorma@yahoo.com\",\r\n    \"password\": \"patricio123456\",\r\n    \"password_confirmation\":\"patricio123456\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}register",
+							"host": [
+								"{{url_transchool2025_laravel}}register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Info",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Patricio\",\r\n    \"last_name\": \"Contreras\",\r\n    \"role\": \"admin\",\r\n    \"comuna\": \"Santiago\",\r\n    \"telefono\": \"+562469265\",\r\n    \"email\": \"patorma@yahoo.com\",\r\n    \"password\": \"patricio123456\",\r\n    \"password_confirmation\":\"patricio123456\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}me",
+							"host": [
+								"{{url_transchool2025_laravel}}me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Patricio\",\r\n    \"last_name\": \"Contreras\",\r\n    \"role\": \"admin\",\r\n    \"comuna\": \"Santiago\",\r\n    \"telefono\": \"+562469265\",\r\n    \"email\": \"patorma@yahoo.com\",\r\n    \"password\": \"patricio123456\",\r\n    \"password_confirmation\":\"patricio123456\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}me",
+							"host": [
+								"{{url_transchool2025_laravel}}me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update By Id User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Tomas\"\r\n    \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}user/3",
+							"host": [
+								"{{url_transchool2025_laravel}}user"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Tomas\"\r\n    \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}user/4",
+							"host": [
+								"{{url_transchool2025_laravel}}user"
+							],
+							"path": [
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Patricio\",\r\n    \"last_name\": \"Contreras\",\r\n    \"role\": \"admin\",\r\n    \"comuna\": \"Santiago\",\r\n    \"telefono\": \"+562469265\",\r\n    \"email\": \"patorma@yahoo.com\",\r\n    \"password\": \"patricio123456\",\r\n    \"password_confirmation\":\"patricio123456\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}logout",
+							"host": [
+								"{{url_transchool2025_laravel}}logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"daniel@gmail.com \",\r\n    \"password\": \"daniel123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}login",
+							"host": [
+								"{{url_transchool2025_laravel}}login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagos",
+			"item": [
+				{
+					"name": "Crear pago",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"monto\":50000,\r\n    \"fecha_vencimiento\": \"2025-01-21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}pagos",
+							"host": [
+								"{{url_transchool2025_laravel}}pagos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete pago",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"monto\":50000,\r\n    \"fecha_vencimiento\": \"2025-01-21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}pago/1",
+							"host": [
+								"{{url_transchool2025_laravel}}pago"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pagos ALL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"monto\":50000,\r\n    \"fecha_vencimiento\": \"2025-01-21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}pagos",
+							"host": [
+								"{{url_transchool2025_laravel}}pagos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pago ById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"monto\":50000,\r\n    \"fecha_vencimiento\": \"2025-01-21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}pago/6",
+							"host": [
+								"{{url_transchool2025_laravel}}pago"
+							],
+							"path": [
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pago ById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"monto\":50000,\r\n    \"fecha_vencimiento\": \"2025-01-21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}pago/6",
+							"host": [
+								"{{url_transchool2025_laravel}}pago"
+							],
+							"path": [
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Furgones",
+			"item": [
+				{
+					"name": "Crear furgon",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}furgones",
+							"host": [
+								"{{url_transchool2025_laravel}}furgones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Furgon",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}furgon/3",
+							"host": [
+								"{{url_transchool2025_laravel}}furgon"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Furgon",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}furgon/1",
+							"host": [
+								"{{url_transchool2025_laravel}}furgon"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Furgones All",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}furgones",
+							"host": [
+								"{{url_transchool2025_laravel}}furgones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Furgon By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}furgones",
+							"host": [
+								"{{url_transchool2025_laravel}}furgones"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Estudiante",
+			"item": [
+				{
+					"name": "Crear estudiante",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Leslie\",\r\n    \"last_name\": \"Torres\",\r\n    \"fecha_nacimiento\": \"2013-05-03\",\r\n    \"colegio\": \"Las Almendras\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}estudiante",
+							"host": [
+								"{{url_transchool2025_laravel}}estudiante"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Estudiantes",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}estudiantes",
+							"host": [
+								"{{url_transchool2025_laravel}}estudiantes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Estudiante ById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}estudiante/1",
+							"host": [
+								"{{url_transchool2025_laravel}}estudiante"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Estudiante By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n     \r\n        \"colegio\": \"Heroes de la Concepcion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}estudiante/1",
+							"host": [
+								"{{url_transchool2025_laravel}}estudiante"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Estudiante",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n     \r\n        \"colegio\": \"Heroes de la Concepcion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}estudiante/20",
+							"host": [
+								"{{url_transchool2025_laravel}}estudiante"
+							],
+							"path": [
+								"20"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Recorridos",
+			"item": [
+				{
+					"name": "Crear Recorrido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion\": \"IDA Y VUELTA\",\r\n    \"estudiante_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}recorrido",
+							"host": [
+								"{{url_transchool2025_laravel}}recorrido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update By Id recorrido",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion\": \"VUELTA\"\r\n   \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}recorrido/1",
+							"host": [
+								"{{url_transchool2025_laravel}}recorrido"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all recorridos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}recorridos",
+							"host": [
+								"{{url_transchool2025_laravel}}recorridos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Recorrido By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}recorrido/1",
+							"host": [
+								"{{url_transchool2025_laravel}}recorrido"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Recorrido By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}recorrido/2",
+							"host": [
+								"{{url_transchool2025_laravel}}recorrido"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Asignaciones",
+			"item": [
+				{
+					"name": "Crear Asignacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}asignacion",
+							"host": [
+								"{{url_transchool2025_laravel}}asignacion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update asignacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"fecha_registro\": \"2025-02-22\"\r\n  \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}asignacion/1",
+							"host": [
+								"{{url_transchool2025_laravel}}asignacion"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Asignaciones",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}asignaciones",
+							"host": [
+								"{{url_transchool2025_laravel}}asignaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Asignacion By Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"fecha_registro\": \"2025-02-22\"\r\n  \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}asignaciones",
+							"host": [
+								"{{url_transchool2025_laravel}}asignaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar asignacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"fecha_registro\": \"2025-02-22\"\r\n  \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url_transchool2025_laravel}}asignacion/4",
+							"host": [
+								"{{url_transchool2025_laravel}}asignacion"
+							],
+							"path": [
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

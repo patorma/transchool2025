@@ -7,59 +7,44 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Api de Sistema de Gestión de Transporte 
+## Introducción
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Esta aplicación corresponde al backend de la aplicacion de manejo de furgones realizado en Laravel 11 para ser consumido por un framework de JavaScript. Corresponde a una actualizacion de un proyecto realizado en 2016 con JEE, en esta ocasión se implemento con php 8.4. 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Pre-requisitos
+#### Que tecnologias o herramientas se necesitan?
+Se necesita tener un IDE compatible con PHP versión 8.1 o superior y el framework laravel 11 en particular en este proyecto se ocupo el IDE Visual Studio. Además hay que tener instalado postman para hacer las pruebas de peticiones a la  API de este backend. A parte de lo anterior se debe instalar composer,revisar en internet requisitos para instalar laravel 11 para más detalle. Después se debe clonar el proyecto del repositorio de guthub se debe modificar el archivo .env  donde se debe configurar la conexion a la base de datos y variables de entorno según correponda. En este archivo se encuentra la llave para conectarse por token. Recordar que si no se crea o no esta en la carpeta de routes el archivo api.php  de las rutas apis y generarlo con el siguiente comando: php artisan install:api.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Instalación 
+* **1. Una vez que se descarga el proyecto se debe ejecutar en el IDE  para ello en una consola  se debe ejecutar el comando php artisan serve para echar a correr el proyecto**
 
-## Learning Laravel
+* **2. Se debe ir a postman  y crear una coleccion o importar el archivo .json que se entregue con este repositorio**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* **3. A partir de la coleccion importada de postman, que se agrega a este repositorio, se empieza hacer las pruebas de los endpoints de la aplicacion.**
+* **4. Hay que ir a la carpeta usuarios y ver el request de login con la direccion {{url_transchool2025_laravel}}login para loguearse y generar el token. Antes de hacer lo anterior se debe ir a la url de regsitrar usuario (modificar esto cuando se inicia ya que esto deberia estar en el modulo de admin osea verlo autenticado) la cual es: {{url_transchool2025_laravel}}register  y los datos de prueba como ejemplo para registrarse como admin es:**
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+ {
+    "name":"Leandro",
+    "last_name": "Contreras",
+    "role": "admin",
+    "comuna": "Los angeles",
+    "telefono": "+562569874",
+    "email": "leandro@mail.com ",
+    "password": "leandro123456",
+    "password_confirmation":"leandro123456"
+ }
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+ * **Se debe revisar las carpetas en postman donde va mostrando los modulos para probar el consumo de la api**
 
-## Laravel Sponsors
+ ## Construido con 
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+ _Herramientas utilizadas_
 
-### Premium Partners
+  *[Visual Studio Code](https://code.visualstudio.com/) - El IDE que fue usado para programar el código
+ *[Laravel](https://laravel.com/) - El framework Laravel versión 11.
+ *[php](https://www.php.net/) - El lenguaje es php versión 8.4.1.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 
