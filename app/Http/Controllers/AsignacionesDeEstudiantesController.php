@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\AsignacionResource;
 use App\Models\AsignacionesDeEstudiantes;
+use App\Models\Estudiante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,6 +21,11 @@ class AsignacionesDeEstudiantesController extends Controller
         if($validator->fails()){
             return response()->json(['error'=> $validator->errors()],422);
         }
+        //  $existingEstudiante = AsignacionesDeEstudiantes::where('estudiante_id',$request->get('estudiante_id'))->first();
+
+        //  if($existingEstudiante){
+        //     return response()->json(['error' => 'El estudiante ya existe en la base de datos.'], 400);
+        //  }
 
         $asignacion= AsignacionesDeEstudiantes::create([
             'fecha_registro' => $request->get('fecha_registro'),
@@ -56,8 +62,23 @@ class AsignacionesDeEstudiantesController extends Controller
         ]);
     }
 
-    public function getAsignaciones(){
-        $asignaciones = AsignacionesDeEstudiantes::with('estudiante','furgon')->paginate(10);
+    public function getAsignaciones(Request $request){
+
+        $usuario_id = auth()->id();
+        $user = auth('api')->user();
+        if($user->role === 'admin'){
+            $asignaciones = AsignacionesDeEstudiantes::with('estudiante', 'furgon.user')
+            ->paginate(10);
+            return $asignaciones->isEmpty()?
+            response()->json(['message'=>'No Asignaciones found']):AsignacionResource::collection($asignaciones);
+        }if($user->role === 'apoderado'){
+           return  response()->json(['message'=>'Eres apoderado no tienes acceso a este recurso']);
+        }
+
+        $asignaciones = AsignacionesDeEstudiantes::whereHas('furgon', function ($query) use ($usuario_id) {
+            $query->where('usuario_id', $usuario_id);
+        })->with('estudiante', 'furgon.user')
+          ->get();
 
         if($asignaciones->isEmpty()){
             return response()->json(['message'=> 'No Asignaciones found']);
@@ -67,6 +88,11 @@ class AsignacionesDeEstudiantesController extends Controller
     }
 
     public function getAsignacionById($id){
+        $user = auth('api')->user();
+        if($user->role === 'apoderado'){
+            return  response()->json(['message'=>'Eres apoderado no tienes acceso a este recurso']);
+         }
+
         $asignacion = AsignacionesDeEstudiantes::with('estudiante','furgon')->find($id);
 
         if(!$asignacion){

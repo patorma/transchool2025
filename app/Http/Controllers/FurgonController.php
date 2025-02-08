@@ -85,7 +85,14 @@ class FurgonController extends Controller
     }
 
     public function getFurgones(){
-        $furgones = Furgon::with('user')->paginate(10);
+        $usuario_id = auth()->id();
+        $user = auth('api')->user();
+        if($user->role === 'admin'){
+          $furgones = Furgon::paginate(10);
+          return $furgones->isEmpty()?
+          response()->json(['message'=>'No Furgones found']):FurgonResource::collection($furgones);
+        }
+        $furgones = Furgon::where('usuario_id',$usuario_id)->paginate(10);
         if($furgones->isEmpty()){
             return response()->json(['message'=> 'No furgones found']);
         }
@@ -93,8 +100,13 @@ class FurgonController extends Controller
         return FurgonResource::collection($furgones);
     }
 
-    public function getFurgonById($id){
-        $furgon = Furgon::with('user')->find($id);
+    public function getFurgonById($id){  $usuario_id = auth()->id();
+        $user = auth('api')->user();
+        if($user->role === 'admin'){
+            $furgon = Furgon::find($id);
+            return !$furgon?response()->json(['message' => 'Furgon not found'],404):new FurgonResource($furgon);
+        }
+        $furgon = Furgon::where('usuario_id',$usuario_id)->find($id);
         if(!$furgon){
             return response()->json(['message' => 'Furgon not found'],404);
         }

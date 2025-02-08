@@ -8,6 +8,7 @@ use App\Http\Controllers\PagoController;
 use App\Http\Controllers\RecorridoController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsApoderado;
+use App\Http\Middleware\IsTransportista;
 use App\Http\Middleware\IsUserAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,21 +25,33 @@ Route::middleware(IsUserAuth::class)->group(function(){
 
    });
 
-   Route::controller(EstudianteController::class)->group(function(){
-
-    Route::get('estudiantes','getEstudiantes');
-    Route::get('/estudiante/{id}','getEstudianteById');
+   Route::controller(FurgonController::class)->group(function(){
+    Route::get('furgones','getFurgones');
+    Route::get('/furgon/{id}','getFurgonById');
    });
+
+//    Route::controller(EstudianteController::class)->group(function(){
+
+//     Route::get('estudiantes','getEstudiantes');
+//     Route::get('/estudiante/{id}','getEstudianteById');
+//    });
 
    Route::controller(PagoController::class)->group(function(){
     Route::get('pagos','getPagos');
+    Route::get('/pago/{id}','getPagoById');
    });
+
+   Route::controller(AsignacionesDeEstudiantesController::class)->group(function(){
+    Route::get('asignaciones','getAsignaciones');
+    Route::get('/asignacion/{id}','getAsignacionById');
+   });
+
 
    Route::middleware([IsAdmin::class])->group(function(){
 
     Route::controller(PagoController::class)->group(function(){
          Route::post('pagos','addPagos');
-         Route::get('/pago/{id}','getPagoById');
+
          Route::patch('/pago/{id}','updatePagoById');
          Route::delete('/pago/{id}','deletePagoById');
 
@@ -54,8 +67,6 @@ Route::middleware(IsUserAuth::class)->group(function(){
     Route::controller(FurgonController::class)->group(function(){
         Route::post('furgones','addFurgon');
         Route::patch('/furgon/{id}','updateFurgonoById');
-        Route::get('furgones','getFurgones');
-        Route::get('/furgon/{id}','getFurgonById');
         Route::delete('/furgon/{id}','deleteFurgonById');
     });
 
@@ -70,9 +81,9 @@ Route::middleware(IsUserAuth::class)->group(function(){
     Route::controller(AsignacionesDeEstudiantesController::class)->group(function(){
         Route::post('asignacion','addAsignacion');
         Route::patch('/asignacion/{id}','updateAsignacionById');
-        Route::get('asignaciones','getAsignaciones');
-        Route::get('/asignacion/{id}','getAsignacionById');
         Route::delete('/asignacion/{id}','deleteById');
+        // Route::get('asignaciones','getAsignaciones');
+        // Route::get('/asignacion/{id}','getAsignacionById');
     });
    });
 
@@ -81,8 +92,21 @@ Route::middleware(IsUserAuth::class)->group(function(){
             Route::post('estudiante','addEstudiante');
             Route::patch('/estudiante/{id}','updateEstudianteById');
             Route::delete('/estudiante/{id}','deleteEstudianteById');
+            Route::get('estudiantes','getEstudiantes');
+         Route::get('/estudiante/{id}','getEstudianteById');
         });
+
+        // Route::controller(PagoController::class)->group(function(){
+        //     Route::get('pagos','getPagos');
+        // });
 
 
    });
+
+//    Route::middleware([IsTransportista::class])->group(function(){
+//     Route::controller(AsignacionesDeEstudiantesController::class)->group(function(){
+//         Route::get('asignaciones','getAsignaciones');
+//         Route::get('/asignacion/{id}','getAsignacionById');
+//     });
+//    });
 } );

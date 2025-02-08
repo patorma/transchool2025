@@ -90,6 +90,12 @@ class PagoController extends Controller
             return $pagos->isEmpty() ?
             response()->json(["message" => "No Pagos found"]):PagoResource::collection($pagos);
         }
+        if($user->role === 'transportista'){
+
+            return
+            response()->json(["message" => "Eres transportista no tienes acceso a este recurso"]);
+        }
+
         $pagos = Pago::where('usuario_id',$usuario_id)->paginate(10);
         if($pagos->isEmpty()){
             return response()->json(['message'=> 'No pagos found']);
