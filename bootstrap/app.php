@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CorsMiddleware;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsApoderado;
 use App\Http\Middleware\IsTransportista;
@@ -22,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         IsUserAuth::class;
         IsApoderado::class;
         IsTransportista::class;
+        CorsMiddleware::class;
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->render(function(AuthenticationException $e, Request $request){
