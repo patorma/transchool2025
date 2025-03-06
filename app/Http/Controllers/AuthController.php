@@ -124,8 +124,9 @@ class AuthController extends Controller
         ]);
     }
 
-    public function getUsers(){
-        $users= User::paginate(10);
+    public function getUsers(Request $request){
+        $userId = $request->user()->id;
+        $users= User::where('id', '!=', $userId)->paginate(10);
         if($users->isEmpty()){
             return response()->json(['message'=> 'No users found']);
         }
