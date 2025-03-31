@@ -77,6 +77,14 @@ class AuthController extends Controller
         return response()->json(['message' => 'Logged out successfully'],200);
     }
 
+    public function getUserById($id){
+        $user = User::find($id);
+        if(!$user){
+            return response()->json(['message' => 'User not found'],404);
+        }
+
+        return (new AuthResource($user));
+    }
     public function updateUserById(Request $request,$id){
         $user = User::find($id);
         if(!$user){
@@ -89,7 +97,7 @@ class AuthController extends Controller
             'role'=>'sometimes|string|in:admin,apoderado,transportista',
             'comuna' => 'sometimes|string|min:4|max:20',
             'telefono' =>'sometimes|string|min:6|max:15',
-            'email'=>'sometimes|string|email|min:10|max:90|unique:users',
+            'email'=>'sometimes|string|email|min:10|max:90',
             'password'=>'sometimes|string|min:10|confirmed',
         ]);
 
@@ -125,8 +133,10 @@ class AuthController extends Controller
     }
 
     public function getUsers(Request $request){
+        //se obtierne el id del usuario que se logueo
         $userId = $request->user()->id;
-        $users= User::where('id', '!=', $userId)->paginate(10);
+        //luego se busca la lista de usuarios pero no incluye el id del usuario que inicio sesion
+        $users= User::where('id', '!=', $userId)->paginate(5);
         if($users->isEmpty()){
             return response()->json(['message'=> 'No users found']);
         }

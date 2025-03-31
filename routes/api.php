@@ -60,7 +60,8 @@ Route::middleware(IsUserAuth::class)->group(function(){
     Route::controller(AuthController::class)->group(function(){
         Route::get('users','getUsers');
         Route::delete('user/{id}','deleteUserById');
-        Route::patch('/user/{id}','updateUserById');
+        Route::put('/user/{id}','updateUserById');
+        Route::get('userId/{id}','getUserById');
     });
 
     //Modulo de Furgones Ingresados por admin
