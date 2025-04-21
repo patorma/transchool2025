@@ -25,33 +25,12 @@ Route::middleware(IsUserAuth::class)->group(function(){
 
    });
 
-   Route::controller(FurgonController::class)->group(function(){
-    Route::get('furgones','getFurgones');
-    Route::get('/furgon/{id}','getFurgonById');
-   });
-
-//    Route::controller(EstudianteController::class)->group(function(){
-
-//     Route::get('estudiantes','getEstudiantes');
-//     Route::get('/estudiante/{id}','getEstudianteById');
-//    });
-
-   Route::controller(PagoController::class)->group(function(){
-    Route::get('pagos','getPagos');
-    Route::get('/pago/{id}','getPagoById');
-   });
-
-   Route::controller(AsignacionesDeEstudiantesController::class)->group(function(){
-    Route::get('asignaciones','getAsignaciones');
-    Route::get('/asignacion/{id}','getAsignacionById');
-   });
-
-
    Route::middleware([IsAdmin::class])->group(function(){
 
     Route::controller(PagoController::class)->group(function(){
          Route::post('pagos','addPagos');
-
+         Route::get('pagos','getPagos');
+         Route::get('/pago/{id}','getPagoById');
          Route::patch('/pago/{id}','updatePagoById');
          Route::delete('/pago/{id}','deletePagoById');
 
@@ -66,6 +45,8 @@ Route::middleware(IsUserAuth::class)->group(function(){
 
     //Modulo de Furgones Ingresados por admin
     Route::controller(FurgonController::class)->group(function(){
+        Route::get('furgones','getFurgones');
+        Route::get('/furgon/{id}','getFurgonById');
         Route::post('furgones','addFurgon');
         Route::patch('/furgon/{id}','updateFurgonoById');
         Route::delete('/furgon/{id}','deleteFurgonById');
@@ -83,6 +64,8 @@ Route::middleware(IsUserAuth::class)->group(function(){
         Route::post('asignacion','addAsignacion');
         Route::patch('/asignacion/{id}','updateAsignacionById');
         Route::delete('/asignacion/{id}','deleteById');
+        Route::get('asignaciones','getAsignaciones');
+        Route::get('/asignacion/{id}','getAsignacionById');
         // Route::get('asignaciones','getAsignaciones');
         // Route::get('/asignacion/{id}','getAsignacionById');
     });
@@ -96,18 +79,5 @@ Route::middleware(IsUserAuth::class)->group(function(){
             Route::get('estudiantes','getEstudiantes');
          Route::get('/estudiante/{id}','getEstudianteById');
         });
-
-        // Route::controller(PagoController::class)->group(function(){
-        //     Route::get('pagos','getPagos');
-        // });
-
-
    });
-
-//    Route::middleware([IsTransportista::class])->group(function(){
-//     Route::controller(AsignacionesDeEstudiantesController::class)->group(function(){
-//         Route::get('asignaciones','getAsignaciones');
-//         Route::get('/asignacion/{id}','getAsignacionById');
-//     });
-//    });
 } );
