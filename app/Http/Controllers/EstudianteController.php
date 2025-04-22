@@ -71,14 +71,16 @@ class EstudianteController extends Controller
     }
 
     public function getEstudiantes(){
+        //se obtiene el id del usuario autenticado
+        //en este caso el del usuario apoderado
         $usuario_id = auth()->id();
-        $user = auth('api')->user();
-        if($user->role === 'admin'){
-            $estudiantes=Estudiante::paginate(10);
-            return $estudiantes->isEmpty()?
-            response()->json(['message'=> 'No Estudiantes found']):EstudianteResource::collection($estudiantes);
+        //$user = auth('api')->user();
+        // if($user->role === 'admin'){
+        //     $estudiantes=Estudiante::paginate(10);
+        //     return $estudiantes->isEmpty()?
+        //     response()->json(['message'=> 'No Estudiantes found']):EstudianteResource::collection($estudiantes);
 
-        }
+        // }
         $estudiantes = Estudiante::where('usuario_id',$usuario_id)->paginate(10);
         if($estudiantes->isEmpty()){
             return response()->json(['message'=> 'No Estudiantes found']);
@@ -105,31 +107,12 @@ class EstudianteController extends Controller
         // return EstudianteResource::collection($estudiantes);
     }
 
-    public function getEstudianteById($id){
-        $usuario_id = auth()->id();
-        $user = auth('api')->user();
-        if($user->role === 'admin'){
-            $estudiante =Estudiante::find($id);
-            return !$estudiante?response()->json(['message' => 'Estudiante not found'],404):new EstudianteResource($estudiante);
-        }
-        $estudiante = Estudiante::where('usuario_id',$usuario_id)->find($id);
-
-        if(!$estudiante){
-            return response()->json(['message' => 'Estudiante not found'],404);
-        }
-
-        $estudiante->load('user');
-
-        return new EstudianteResource($estudiante);
-    }
-
-
     public function deleteEstudianteById($id){
 
         $usuario_id = auth()->id();
         $estudiante = Estudiante::where('usuario_id',$usuario_id)->find($id);
         if(!$estudiante){
-            return response()->json(['message'=>'Estudiante not found'.' '.'con el id:'.' '.$id],404);
+            return response()->json(['message'=>'No tienes un estudiante registrado'.' '.'con ese id:'.' '.$id],404);
         }
 
         $estudiante->delete();

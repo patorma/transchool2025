@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AsignacionesDeEstudiantesController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EstudianteAdminController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\FurgonController;
 use App\Http\Controllers\PagoController;
@@ -27,6 +28,12 @@ Route::middleware(IsUserAuth::class)->group(function(){
 
    Route::middleware([IsAdmin::class])->group(function(){
 
+    Route::controller(EstudianteAdminController::class)->group(
+        function(){
+            Route::get('estudianteAll','getEstudiantes');
+            Route::get('/estudiante/{id}','getEstudianteById');
+        }
+    );
     Route::controller(PagoController::class)->group(function(){
          Route::post('pagos','addPagos');
          Route::get('pagos','getPagos');
@@ -77,7 +84,7 @@ Route::middleware(IsUserAuth::class)->group(function(){
             Route::patch('/estudiante/{id}','updateEstudianteById');
             Route::delete('/estudiante/{id}','deleteEstudianteById');
             Route::get('estudiantes','getEstudiantes');
-         Route::get('/estudiante/{id}','getEstudianteById');
+
         });
    });
 } );
