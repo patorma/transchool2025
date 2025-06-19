@@ -19,7 +19,7 @@ class FurgonResource extends JsonResource
              'patente' => $this->patente,
              'descripcion' => $this->descripcion,
              'usuario' =>[
-                'id' => $this->usuario_id,
+                'id' => $this->usuario_transportista_id,
                 'nombres' => $this->user->name ?? null,
                 'apellidos' => $this->user->last_name ?? null,
                  'rol' =>  $this->user->role ?? null

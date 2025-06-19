@@ -26,6 +26,7 @@ Route::middleware(IsUserAuth::class)->group(function(){
 
    });
 
+   //---------------comienzan las rutas del admin------------------------
    Route::middleware([IsAdmin::class])->group(function(){
 
     Route::controller(EstudianteAdminController::class)->group(
@@ -76,7 +77,7 @@ Route::middleware(IsUserAuth::class)->group(function(){
         // Route::get('asignaciones','getAsignaciones');
         // Route::get('/asignacion/{id}','getAsignacionById');
     });
-   });
+   }); //--------------------aca termine las rutas del admin--------------------
 
    Route::middleware([IsApoderado::class])->group(function(){
         Route::controller(EstudianteController::class)->group(function(){

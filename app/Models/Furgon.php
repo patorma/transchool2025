@@ -12,12 +12,12 @@ class Furgon extends Model
     protected $fillable =[
         'patente',
         'descripcion',
-        'usuario_id'
+        'usuario_transportista_id'
     ];
     protected $table = 'furgones';
 
     public function user(){
-        return $this->belongsTo(User::class,'usuario_id');
+        return $this->belongsTo(User::class,'usuario_transportista_id');
     }
 
     public function asignaciones(){

@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('patente')->unique();
             $table->text('descripcion');
-            $table->foreignId('usuario_id');
+            $table->foreignId('usuario_transportista_id')->unique();
             $table->timestamps();
 
-            $table->foreign('usuario_id')
+            $table->foreign('usuario_transportista_id')
             ->references('id')
             ->on('users')
             ->onUpdate('cascade')

@@ -14,7 +14,7 @@ class FurgonController extends Controller
         $validator = Validator::make($request->all(),[
            'patente' => 'required|string|min:8|max:8',
             'descripcion' => 'required|string|min:10',
-             'usuario_id' => 'required|exists:users,id'
+             'usuario_transportista_id' => 'required|exists:users,id'
         ]);
 
         if($validator->fails()){
@@ -22,7 +22,7 @@ class FurgonController extends Controller
         }
       //  $usuario = User::find($request->get('usuario_id'));
       //  $user = auth('api')->user();
-        $user_transportista= User::where('id',$request->get('usuario_id'))
+        $user_transportista= User::where('id',$request->get('usuario_transportista_id'))
                                  ->where('role','transportista')
                                  ->first();
         if(!$user_transportista){
@@ -34,7 +34,13 @@ class FurgonController extends Controller
            if ($existingFurgon) {
                     return response()->json(['error' => 'La patente ya existe en la base de datos.'], 400);
            }
-      //  } else return response()->json(['error' => 'El usuario seleccionado no tiene el rol de transportista.'], 400);
+
+           $existingTransportista = Furgon::where('usuario_transportista_id',$request->get('usuario_transportista_id'))->first();
+
+           if($existingTransportista){
+                return response()->json(['error' => 'Ya le asignaste un furgon a este transportista!!!!.'], 400);
+           }
+           //  } else return response()->json(['error' => 'El usuario seleccionado no tiene el rol de transportista.'], 400);
 
         // if (  !$usuario || !$user->role ==='transportista') {
         //     return response()->json(['error' => 'El usuario seleccionado no tiene el rol de transportista.'], 400);
@@ -48,7 +54,7 @@ class FurgonController extends Controller
         $furgon =Furgon::create([
             'patente'=> $request->get('patente'),
             'descripcion' =>$request->get('descripcion'),
-            'usuario_id' => $request->get('usuario_id'),
+            'usuario_transportista_id' => $request->get('usuario_transportista_id'),
         ]);
 
 
@@ -85,14 +91,14 @@ class FurgonController extends Controller
     }
 
     public function getFurgones(){
-        $usuario_id = auth()->id();
+        $usuario_transportista_id = auth()->id();
         $user = auth('api')->user();
         if($user->role === 'admin'){
           $furgones = Furgon::paginate(10);
           return $furgones->isEmpty()?
           response()->json(['message'=>'No Furgones found']):FurgonResource::collection($furgones);
         }
-        $furgones = Furgon::where('usuario_id',$usuario_id)->paginate(10);
+        $furgones = Furgon::where('usuario_transportista_id',$usuario_transportista_id)->paginate(10);
         if($furgones->isEmpty()){
             return response()->json(['message'=> 'No furgones found']);
         }
@@ -106,7 +112,7 @@ class FurgonController extends Controller
             $furgon = Furgon::find($id);
             return !$furgon?response()->json(['message' => 'Furgon not found'],404):new FurgonResource($furgon);
         }
-        $furgon = Furgon::where('usuario_id',$usuario_id)->find($id);
+        $furgon = Furgon::where('usuario_transportista_id',$usuario_id)->find($id);
         if(!$furgon){
             return response()->json(['message' => 'Furgon not found'],404);
         }

@@ -83,6 +83,6 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function furgon(){
-        return $this->hasOne(Furgon::class,'usuario_id');
+        return $this->hasOne(Furgon::class,'usuario_transportista_id');
     }
 }
