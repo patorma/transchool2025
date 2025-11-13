@@ -12,7 +12,8 @@ class AsignacionesDeEstudiantes extends Model
     protected $fillable =[
         'fecha_registro',
          'estudiante_id',
-         'furgon_id'
+         'furgon_id',
+         'recorrido_id'
      ];
 
      public function estudiante(){
@@ -22,4 +23,9 @@ class AsignacionesDeEstudiantes extends Model
      public function furgon(){
         return $this->belongsTo(Furgon::class,'furgon_id');
      }
+
+     public function recorrido(){
+        return $this->belongsTo(Recorrido::class);
+     }
+
 }

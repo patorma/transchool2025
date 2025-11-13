@@ -17,6 +17,7 @@ class Furgon extends Model
     protected $table = 'furgones';
 
     public function user(){
+        //belon
         return $this->belongsTo(User::class,'usuario_transportista_id');
     }
 

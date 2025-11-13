@@ -11,8 +11,9 @@ class RecorridoController extends Controller
 {
     public function addRecorrido(Request $request){
         $validator = Validator::make($request->all(),[
+            'origen' => 'required|string|min:10|max:250',
+            'destino' => 'required|string|min:10|max:250',
             'descripcion'=> 'required|string|min:5|max:300',
-            'estudiante_id' =>'required|exists:estudiantes,id'
         ]);
 
 
@@ -21,8 +22,10 @@ class RecorridoController extends Controller
         }
 
         $recorrido= Recorrido::create([
+            'origen' => $request->get('origen'),
+            'destino' => $request->get('destino'),
             'descripcion' => $request->get('descripcion'),
-            'estudiante_id' => $request->get('estudiante_id')
+
         ]);
 
         return (new RecorridoResource($recorrido))->additional([
@@ -37,13 +40,23 @@ class RecorridoController extends Controller
         }
 
         $validator = Validator::make($request->all(),[
-             'descripcion'=> 'sometimes|string|min:5|max:300',
+            'origen' => 'sometimes|string|min:10|max:250',
+            'destino' => 'sometimes|string|min:10|max:250',
+            'descripcion'=> 'sometimes|string|min:5|max:300',
             //'estudiante_id' =>'sometimes|exists:estudiantes,id'
         ]);
 
         if($validator->fails()){
             return response()->json(['error'=> $validator->errors()],422);
         }
+
+        if($request->has('origen')){
+            $recorrido->origen = $request->origen;
+        }
+        if($request->has('destino')){
+            $recorrido->destino = $request->destino;
+        }
+        //verifica si viene el peticion http el valor de descripcion
         if($request->has('descripcion')){
             $recorrido->descripcion = $request->descripcion;
         }
@@ -55,7 +68,7 @@ class RecorridoController extends Controller
     }
 
     public function getRecorridos(){
-        $recorridos = Recorrido::with('estudiante')->paginate(10);
+        $recorridos = Recorrido::paginate(10);
 
         if($recorridos->isEmpty()){
             return response()->json(['message'=> 'No Recorridos found']);
@@ -65,13 +78,13 @@ class RecorridoController extends Controller
     }
 
     public function getRecorridoById($id){
-        $recorrido = Recorrido::with('estudiante')->find($id);
+        $recorrido = Recorrido::find($id);
 
         if(!$recorrido){
             return response()->json(['message' => 'Recorrido not found'],404);
         }
 
-        $recorrido->load('estudiante');
+      //  $recorrido->load('estudiante');
 
         return new RecorridoResource($recorrido);
     }

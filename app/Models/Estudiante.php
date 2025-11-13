@@ -26,7 +26,5 @@ class Estudiante extends Model
         return $this->hasMany(AsignacionesDeEstudiantes::class);
     }
 
-    public function recorridos(){
-        return $this->hasMany(Recorrido::class);
-    }
+    
 }

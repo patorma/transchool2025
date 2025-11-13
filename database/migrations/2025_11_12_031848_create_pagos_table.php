@@ -13,16 +13,13 @@ return new class extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->id();
-            $table->integer('monto');
-            $table->date('fecha_vencimiento');
             $table->date('fecha_pago')->nullable();
-            $table->enum('estado',['pendiente','pagado','vencido'])->default('pendiente');
-            $table->foreignId('usuario_id');
+            $table->foreignId('mensualidad_id');
             $table->timestamps();
 
-            $table->foreign('usuario_id')
+            $table->foreign('mensualidad_id')
                 ->references('id')
-                ->on('users')
+                ->on('mensualidades')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });

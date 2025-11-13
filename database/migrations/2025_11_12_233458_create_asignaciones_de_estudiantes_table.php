@@ -15,12 +15,20 @@ return new class extends Migration
             $table->id();
             $table->date('fecha_registro');
             $table->foreignId('estudiante_id')->unique();
+            $table->foreignId('recorrido_id');
             $table->foreignId('furgon_id');
+
             $table->timestamps();
 
             $table->foreign('estudiante_id')
             ->references('id')
             ->on('estudiantes')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->foreign('recorrido_id')
+            ->references('id')
+            ->on('recorridos')
             ->onUpdate('cascade')
             ->onDelete('cascade');
 

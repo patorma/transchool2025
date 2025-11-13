@@ -40,6 +40,12 @@ class AsignacionResource extends JsonResource
                      'apellidos'=> $this->furgon->user->last_name,
                      'rol' => $this->furgon->user->role
                     ]
+                 ],
+            'recorrido' =>[
+                'id' => $this->recorrido_id,
+                'origen' => $this->origen,
+                'destino' => $this->destino,
+                'descripcion' => $this->descripcion
             ]
         ];
     }

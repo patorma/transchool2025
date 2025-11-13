@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Recorrido extends Model
 {
     protected $fillable = [
-        'descripcion',
-        'estudiante_id'
+        'origen',
+        'destino',
+        'descripcion'
+
     ];
 
-    public function estudiante(){
-        return $this->belongsTo(Estudiante::class,'estudiante_id');
-    }
+   public function asignaciones(){
+     return $this->hasMany(AsignacionesDeEstudiantes::class);
+   }
 }

@@ -78,8 +78,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Estudiante::class);
     }
 
-    public function pagos(){
-        return $this->hasMany(Pago::class);
+    //un user con role apoderado tiene asociadas muchas mensualiddaes
+    public function mensualidades(){
+        return $this->hasMany(Mensualidad::class);
     }
 
     public function furgon(){

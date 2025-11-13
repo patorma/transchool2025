@@ -16,13 +16,10 @@ class RecorridoResource extends JsonResource
     {
         return [
             'id'=> $this->id,
+            'origen' => $this->origen,
+            'destino' => $this->destino,
             'descripcion' => $this->descripcion,
-            'estudiante'=> [
-                'id' => $this->estudiante_id,
-                'nombre' => $this->estudiante->name,
-                'apellidos'=> $this->estudiante->last_name,
-                'colegio' => $this->estudiante->colegio
-            ]
+
         ];
     }
 }

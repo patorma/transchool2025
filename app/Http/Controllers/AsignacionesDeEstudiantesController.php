@@ -15,22 +15,20 @@ class AsignacionesDeEstudiantesController extends Controller
         $validator = Validator::make($request->all(),[
             'fecha_registro'=> 'required|date',
             'estudiante_id' => 'required|unique:asignaciones_de_estudiantes|exists:estudiantes,id',
-            'furgon_id' => 'required|exists:furgones,id'
+            'furgon_id' => 'required|exists:furgones,id',
+            'recorrido_id' => 'required|exists:recorridos,id'
         ]);
 
         if($validator->fails()){
             return response()->json(['error'=> $validator->errors()],422);
         }
-        //  $existingEstudiante = AsignacionesDeEstudiantes::where('estudiante_id',$request->get('estudiante_id'))->first();
 
-        //  if($existingEstudiante){
-        //     return response()->json(['error' => 'El estudiante ya existe en la base de datos.'], 400);
-        //  }
 
         $asignacion= AsignacionesDeEstudiantes::create([
             'fecha_registro' => $request->get('fecha_registro'),
             'estudiante_id' => $request->get('estudiante_id'),
-            'furgon_id' => $request->get('furgon_id')
+            'furgon_id' => $request->get('furgon_id'),
+            'recorrido_id' =>$request->get('recorrido_id')
         ]);
 
         return (new AsignacionResource($asignacion))->additional([
@@ -67,7 +65,7 @@ class AsignacionesDeEstudiantesController extends Controller
         $usuario_id = auth()->id();
         $user = auth('api')->user();
         if($user->role === 'admin'){
-            $asignaciones = AsignacionesDeEstudiantes::with('estudiante', 'furgon.user')
+            $asignaciones = AsignacionesDeEstudiantes::with('estudiante', 'furgon.user','recorrido')
             ->paginate(10);
             return $asignaciones->isEmpty()?
             response()->json(['message'=>'No Asignaciones found']):AsignacionResource::collection($asignaciones);
@@ -77,7 +75,7 @@ class AsignacionesDeEstudiantesController extends Controller
    //esto es para que el transportista vea los estudiantes asignados a su furgon
         $asignaciones = AsignacionesDeEstudiantes::whereHas('furgon', function ($query) use ($usuario_id) {
             $query->where('usuario_id', $usuario_id);
-        })->with('estudiante', 'furgon.user')
+        })->with('estudiante', 'furgon.user','recorrido')
           ->get();
 
         if($asignaciones->isEmpty()){
@@ -93,13 +91,13 @@ class AsignacionesDeEstudiantesController extends Controller
             return  response()->json(['message'=>'Eres apoderado no tienes acceso a este recurso']);
          }
 
-        $asignacion = AsignacionesDeEstudiantes::with('estudiante','furgon')->find($id);
+        $asignacion = AsignacionesDeEstudiantes::with('estudiante','furgon','recorrido')->find($id);
 
         if(!$asignacion){
             return response()->json(['message' => 'Asignacion not found'],404);
         }
 
-        $asignacion->load('estudiante','furgon');
+        $asignacion->load('estudiante','furgon','recorrido');
 
         return new AsignacionResource($asignacion);
     }

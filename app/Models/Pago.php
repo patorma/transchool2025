@@ -11,24 +11,26 @@ class Pago extends Model
     use HasFactory;
 
     protected $fillable =[
-        'monto',
-        'fecha_vencimiento',
         'fecha_pago',
-        'estado',
-        'usuario_id'
+        'mensualidad_id'
 
     ];
+    //se queda con el id de mensualidad
+    public function mensualidad(){
+        return $this->belongsTo(Mensualidad::class,'mensualidad_id');
+    }
 
 
-    public function user(){
-        // un estudiante pertene a un usuario apoderado
-      return $this->belongsTo(User::class,'usuario_id');
-  }
-
+//     public function user(){
+//         // un estudiante pertene a un usuario apoderado
+//       return $this->belongsTo(User::class,'usuario_id');
+//   }
+//quede acá
   public function calcularMulta(){
     $diasDiferencia = 0;
       if($this->fecha_pago){
-        $fechaVencimiento = Carbon::parse($this->fecha_vencimiento);
+        //busca en la tabla mensualidad la fecha de vencimiento
+        $fechaVencimiento = Carbon::parse(Mensualidad::find($this->mensualidad_id)->fecha_vencimiento);
         $fechaPago = Carbon::parse($this->fecha_pago);
         $diasDiferencia = $fechaVencimiento->diffInDays($fechaPago, false);
       }
